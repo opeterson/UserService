@@ -37,7 +37,7 @@
 		</profile>
 	</profiles>
 	<build>
-	<finalName>loginapp</finalName>
+	<finalName>userservice</finalName>
 		<!-- <finalName>sysinfo-${environment}-${version}</finalName> -->
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
@@ -78,7 +78,7 @@
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<server>TomcatServer</server>
-					<path>/loginapp</path>
+					<path>/userservice</path>
 				</configuration>
 			</plugin>
 		</plugins>
