@@ -1,4 +1,4 @@
-package ca.owenpeterson.persistence;
+package ca.owenpeterson.userservice.persistence;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
