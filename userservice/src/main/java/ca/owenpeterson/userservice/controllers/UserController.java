@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ca.owenpeterson.userservice.models.AuthenticatedUser;
 import ca.owenpeterson.userservice.models.UserDto;
-import ca.owenpeterson.util.URIConstants;
+import ca.owenpeterson.userservice.util.URIConstants;
 
 /**
  * This class will be used for CRUD tasks.

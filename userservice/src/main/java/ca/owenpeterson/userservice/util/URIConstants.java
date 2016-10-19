@@ -1,4 +1,4 @@
-package ca.owenpeterson.util;
+package ca.owenpeterson.userservice.util;
 
 public class URIConstants {
 	
