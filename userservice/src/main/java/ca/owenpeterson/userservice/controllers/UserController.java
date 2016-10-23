@@ -29,8 +29,8 @@ public class UserController {
 		AuthenticatedUser authenticatedUser = new AuthenticatedUser();
 		
 		if (null != user) {
-			authenticatedUser.setUsername(user.getUsername());
-			authenticatedUser.setEmail(user.getEmail());
+			authenticatedUser.setUsername("iamnewuser");
+			authenticatedUser.setEmail("iamnewuser@email.com");
 		}
 		
 		logger.debug("createUser():end");
