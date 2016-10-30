@@ -53,6 +53,6 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		
 		<!-- Names the annotated entity class -->
-<!-- 		<mapping class="ca.owenpeterson.Clazz"/> -->
+ 		<mapping class="ca.owenpeterson.userservice.models.UserDto"/>
 	</session-factory>
 </hibernate-configuration>

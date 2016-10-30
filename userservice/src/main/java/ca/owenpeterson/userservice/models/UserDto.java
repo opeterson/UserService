@@ -1,13 +1,23 @@
 package ca.owenpeterson.userservice.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * This class is used for creating a new User in the database.
  * TODO: Better documentation.
  * @author owen
  *
  */
+@Entity
+@Table(name="user")
 public class UserDto {
 	
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private Long userId;
 	private String username;
 	private String password;
 	private String email;
@@ -29,5 +39,11 @@ public class UserDto {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 }

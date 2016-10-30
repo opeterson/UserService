@@ -20,5 +20,6 @@
     <beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     </beans:bean> 
      
-    <context:component-scan base-package="ca.owenpeterson.userservice.controllers" />     
+    <context:component-scan base-package="ca.owenpeterson.userservice.controllers" />
+    <context:component-scan base-package="ca.owenpeterson.userservice.dao" />     
 </beans:beans>

@@ -2,12 +2,14 @@ package ca.owenpeterson.userservice.controllers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ca.owenpeterson.userservice.dao.UserDao;
 import ca.owenpeterson.userservice.models.AuthenticatedUser;
 import ca.owenpeterson.userservice.models.UserDto;
 import ca.owenpeterson.userservice.util.URIConstants;
@@ -21,7 +23,9 @@ import ca.owenpeterson.userservice.util.URIConstants;
 public class UserController {
 	static Logger logger = LogManager.getLogger(UserController.class);
 	
-	//TODO: This is a test.
+	@Autowired
+	UserDao userDao;
+
 	@RequestMapping(value=URIConstants.USER_CREATE, method=RequestMethod.POST)
 	public @ResponseBody AuthenticatedUser createUser(@RequestBody UserDto user)
 	{
@@ -29,6 +33,7 @@ public class UserController {
 		AuthenticatedUser authenticatedUser = new AuthenticatedUser();
 		
 		if (null != user) {
+			userDao.save(user);
 			authenticatedUser.setUsername("iamnewuser");
 			authenticatedUser.setEmail("iamnewuser@email.com");
 		}

@@ -7,7 +7,7 @@ public class AuthenticatedUser implements Serializable {
 	private static final long serialVersionUID = -6676048350671906151L;
 	private String username;
 	private String email;
-	
+		
 	public AuthenticatedUser() {
 	}
 	
@@ -28,5 +28,4 @@ public class AuthenticatedUser implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 }
