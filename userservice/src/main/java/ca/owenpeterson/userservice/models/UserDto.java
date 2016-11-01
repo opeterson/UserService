@@ -1,10 +1,13 @@
 package ca.owenpeterson.userservice.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * This class is used for creating a new User in the database.
@@ -13,9 +16,12 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="user")
-public class UserDto {
+@Table(name="oapuser")
+@XmlRootElement(name="user")
+public class UserDto implements Serializable {
 	
+	private static final long serialVersionUID = -4397877745285883766L;
+
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long userId;
 	private String username;
