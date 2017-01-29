@@ -30,12 +30,13 @@ public class UserController {
 	public @ResponseBody AuthenticatedUser createUser(@RequestBody UserDto user)
 	{
 		logger.debug("createUser():begin");
+		//TODO: Validate before saving. Does the user already exist? Email in use?
 		AuthenticatedUser authenticatedUser = new AuthenticatedUser();
 		
 		if (null != user) {
 			userDao.save(user);
-			authenticatedUser.setUsername("iamnewuser");
-			authenticatedUser.setEmail("iamnewuser@email.com");
+			authenticatedUser.setUsername(user.getUsername());
+			authenticatedUser.setEmail(user.getEmail());
 		}
 		
 		logger.debug("createUser():end");
