@@ -8,7 +8,7 @@ import ca.owenpeterson.userservice.persistence.HibernateUtil;
 
 public class HibernateDao {
 	
-	private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	public static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
 	public void save(Object obj)
 	{
@@ -21,7 +21,9 @@ public class HibernateDao {
 		} catch (HibernateException ex)
 		{
 			throw(ex);
-		} 		
+		}
+		
+		session.close();
 	}
 	
 	public void saveOrUpdate(Object obj)
