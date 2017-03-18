@@ -16,7 +16,7 @@ import ca.owenpeterson.userservice.util.URIConstants;
 
 @Controller
 public class AuthenticationController {
-	static Logger logger = LogManager.getLogger(UserController.class);
+	static Logger logger = LogManager.getLogger(AuthenticationController.class);
 	
 	@Autowired
 	private AuthenticationService authenticationService;
