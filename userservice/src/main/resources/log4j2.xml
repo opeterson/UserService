@@ -26,7 +26,7 @@
       <appender-ref ref="AsyncFile" level="${log4j.springframework.file.level}" />
     </logger>
     <logger name="ca.owenpeterson.userservice">
-      <appender-ref ref="AsyncFile" level="${log4j.spotter.file.level}" />
+      <appender-ref ref="AsyncFile" level="${log4j.userservice.file.level}" />
     </logger>
 		<root level="${log4j.root.console.level}">
 			<appender-ref ref="Console"  />
