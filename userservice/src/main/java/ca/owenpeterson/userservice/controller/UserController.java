@@ -13,6 +13,7 @@ import ca.owenpeterson.userservice.dao.UserDao;
 import ca.owenpeterson.userservice.models.AuthenticatedUser;
 import ca.owenpeterson.userservice.models.UserDto;
 import ca.owenpeterson.userservice.util.URIConstants;
+import ca.owenpeterson.userservice.validator.UserDtoValidator;
 
 /**
  * This class will be used for CRUD tasks.
@@ -25,15 +26,19 @@ public class UserController {
 	
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	UserDtoValidator userDtoValidator;
 
 	@RequestMapping(value=URIConstants.USER_CREATE, method=RequestMethod.POST)
 	public @ResponseBody AuthenticatedUser createUser(@RequestBody UserDto user)
 	{
 		logger.debug("createUser():begin");
 		//TODO: Validate before saving. Does the user already exist? Email in use?
+		//TODO: return http status if the user already exists.
 		AuthenticatedUser authenticatedUser = new AuthenticatedUser();
 		
-		if (null != user) {
+		if (null != user && !userDtoValidator.isInvalidForCreate(user)) {
 			userDao.save(user);
 			authenticatedUser.setUsername(user.getUsername());
 			authenticatedUser.setEmail(user.getEmail());

@@ -22,5 +22,6 @@
      
     <context:component-scan base-package="ca.owenpeterson.userservice.controller" />
     <context:component-scan base-package="ca.owenpeterson.userservice.service" />
-    <context:component-scan base-package="ca.owenpeterson.userservice.dao" />     
+    <context:component-scan base-package="ca.owenpeterson.userservice.dao" />
+    <context:component-scan base-package="ca.owenpeterson.userservice.validator" />   
 </beans:beans>

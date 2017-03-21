@@ -39,4 +39,23 @@ public class UserDao extends HibernateDao {
 		session.close();
 		return foundUser;
 	}
+	
+	public boolean usernameExists(UserDto user)
+	{
+		boolean hasMatch = false;
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(UserDto.class);
+		criteria.add(Restrictions.eq("username", user.getUsername()));
+		
+		UserDto foundUser = (UserDto) criteria.uniqueResult();		
+		
+		session.close();
+		
+		if (null != foundUser)
+		{
+			hasMatch = user.getUsername().equals(foundUser.getUsername());
+		}
+		
+		return hasMatch;
+	}
 }
