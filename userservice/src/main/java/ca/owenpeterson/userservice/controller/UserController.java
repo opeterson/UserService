@@ -3,6 +3,8 @@ package ca.owenpeterson.userservice.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,11 +33,11 @@ public class UserController {
 	UserDtoValidator userDtoValidator;
 
 	@RequestMapping(value=URIConstants.USER_CREATE, method=RequestMethod.POST)
-	public @ResponseBody AuthenticatedUser createUser(@RequestBody UserDto user)
+	public @ResponseBody ResponseEntity<AuthenticatedUser> createUser(@RequestBody UserDto user)
 	{
 		logger.debug("createUser():begin");
 		//TODO: Validate before saving. Does the user already exist? Email in use?
-		//TODO: return http status if the user already exists.
+		//TODO: return http status if the user already exists. 409 CONFLICT.
 		AuthenticatedUser authenticatedUser = new AuthenticatedUser();
 		
 		if (null != user && !userDtoValidator.usernameExists(user)) {
@@ -45,6 +47,6 @@ public class UserController {
 		}
 		
 		logger.debug("createUser():end");
-		return authenticatedUser;
+		return ResponseEntity.ok(authenticatedUser);
 	}
 }
