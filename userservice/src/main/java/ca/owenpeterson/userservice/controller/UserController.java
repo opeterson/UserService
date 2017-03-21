@@ -37,16 +37,29 @@ public class UserController {
 	{
 		logger.debug("createUser():begin");
 		//TODO: Validate before saving. Does the user already exist? Email in use?
-		//TODO: return http status if the user already exists. 409 CONFLICT.
-		AuthenticatedUser authenticatedUser = new AuthenticatedUser();
+		AuthenticatedUser authenticatedUser = null;
+		HttpStatus status = HttpStatus.OK;
 		
-		if (null != user && !userDtoValidator.usernameExists(user)) {
-			userDao.save(user);
-			authenticatedUser.setUsername(user.getUsername());
-			authenticatedUser.setEmail(user.getEmail());
+		if (null != user)
+		{
+			boolean userExists = userDtoValidator.usernameExists(user);
+			
+			if (!userExists)
+			{				
+				userDao.save(user);
+				//TODO: Return a userDto or maybe just OK.
+				authenticatedUser = new AuthenticatedUser();
+				authenticatedUser.setUsername(user.getUsername());
+				authenticatedUser.setEmail(user.getEmail());				
+			}
+			else
+			{
+				//The user already exists
+				status = HttpStatus.CONFLICT;
+			}
 		}
 		
 		logger.debug("createUser():end");
-		return ResponseEntity.ok(authenticatedUser);
+		return new ResponseEntity<AuthenticatedUser>(authenticatedUser, status); 
 	}
 }
