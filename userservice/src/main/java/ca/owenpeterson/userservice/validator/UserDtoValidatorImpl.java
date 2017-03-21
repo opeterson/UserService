@@ -13,7 +13,7 @@ public class UserDtoValidatorImpl implements UserDtoValidator {
 	UserDao userDao;
 	
 	@Override
-	public boolean isInvalidForCreate(UserDto userDto) {
+	public boolean usernameExists(UserDto userDto) {
 		if (null == userDto)
 		{
 			throw new IllegalArgumentException("UserDto cannot be null!");

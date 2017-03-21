@@ -38,7 +38,7 @@ public class UserController {
 		//TODO: return http status if the user already exists.
 		AuthenticatedUser authenticatedUser = new AuthenticatedUser();
 		
-		if (null != user && !userDtoValidator.isInvalidForCreate(user)) {
+		if (null != user && !userDtoValidator.usernameExists(user)) {
 			userDao.save(user);
 			authenticatedUser.setUsername(user.getUsername());
 			authenticatedUser.setEmail(user.getEmail());

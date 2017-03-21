@@ -7,5 +7,5 @@ import ca.owenpeterson.userservice.models.UserDto;
 @Component
 public interface UserDtoValidator {
 	
-	public boolean isInvalidForCreate(UserDto userDto);
+	public boolean usernameExists(UserDto userDto);
 }
