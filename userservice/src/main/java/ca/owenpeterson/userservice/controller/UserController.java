@@ -38,7 +38,7 @@ public class UserController {
 		logger.debug("createUser():begin");
 		//TODO: Validate before saving. Does the user already exist? Email in use?
 		AuthenticatedUser authenticatedUser = null;
-		HttpStatus status = HttpStatus.OK;
+		HttpStatus status = HttpStatus.CREATED;
 		
 		if (null != user)
 		{
