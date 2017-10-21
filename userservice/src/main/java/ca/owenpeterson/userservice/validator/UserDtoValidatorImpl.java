@@ -23,9 +23,7 @@ public class UserDtoValidatorImpl implements UserDtoValidator {
 		
 		usernameExists = userDao.usernameExists(userDto);
 		
-		return usernameExists;
-		
-		
+		return usernameExists;		
 	}
 
 }
