@@ -19,7 +19,7 @@ public class AuthenticationService {
 		UserDto foundUser = null;
 		if (null != user)
 		{
-			foundUser = userDao.authenticate(user);
+			foundUser = userDao.getUser(user);
 		}
 		
 		if (null != foundUser)

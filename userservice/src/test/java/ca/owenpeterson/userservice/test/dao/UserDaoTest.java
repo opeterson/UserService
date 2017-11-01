@@ -20,7 +20,7 @@ public class UserDaoTest {
 		userDto.setEmail("owenpeterson@email.com");
 		
 		try {
-			userDao.save(userDto);
+			userDao.saveUser(userDto);
 		} catch (Exception ex)
 		{
 			fail();

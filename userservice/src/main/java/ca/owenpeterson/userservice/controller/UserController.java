@@ -36,17 +36,17 @@ public class UserController {
 	public @ResponseBody ResponseEntity<AuthenticatedUser> createUser(@RequestBody UserDto user)
 	{
 		logger.debug("createUser():begin");
-		//TODO: Validate before saving. Does the user already exist? Email in use?
 		AuthenticatedUser authenticatedUser = null;
 		HttpStatus status = HttpStatus.CREATED;
 		
 		if (null != user)
 		{
 			boolean userExists = userDtoValidator.usernameExists(user);
+			boolean emailInUse = userDtoValidator.emailInUse(user);
 			
-			if (!userExists)
+			if (!userExists && !emailInUse)
 			{				
-				userDao.save(user);
+				userDao.saveUser(user);
 				//TODO: Return a userDto or maybe just OK.
 				authenticatedUser = new AuthenticatedUser();
 				authenticatedUser.setUsername(user.getUsername());
@@ -54,8 +54,9 @@ public class UserController {
 			}
 			else
 			{
-				//The user already exists
+				//The user already exists or email is in use.
 				status = HttpStatus.CONFLICT;
+				//authenticatedUser = new AuthenticatedUser();
 			}
 		}
 		

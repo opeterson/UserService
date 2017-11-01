@@ -8,7 +8,7 @@ import ca.owenpeterson.userservice.persistence.HibernateUtil;
 
 public class HibernateDao {
 	
-	public static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	public static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
 	public void save(Object obj)
 	{

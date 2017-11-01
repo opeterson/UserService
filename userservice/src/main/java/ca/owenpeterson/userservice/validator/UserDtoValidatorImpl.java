@@ -13,7 +13,8 @@ public class UserDtoValidatorImpl implements UserDtoValidator {
 	UserDao userDao;
 	
 	@Override
-	public boolean usernameExists(UserDto userDto) {
+	public boolean usernameExists(UserDto userDto) 
+	{
 		if (null == userDto)
 		{
 			throw new IllegalArgumentException("UserDto cannot be null!");
@@ -21,9 +22,26 @@ public class UserDtoValidatorImpl implements UserDtoValidator {
 		
 		boolean usernameExists = false;
 		
-		usernameExists = userDao.usernameExists(userDto);
+		usernameExists = userDao.usernameInUse(userDto);
 		
 		return usernameExists;		
 	}
+
+	@Override
+	public boolean emailInUse(UserDto userDto) 
+	{
+		if (null == userDto)
+		{
+			throw new IllegalArgumentException("UserDto cannot be null!");
+		}
+		
+		boolean emailInUse = false;
+		
+		emailInUse = userDao.emailInUse(userDto);
+		
+		return emailInUse;	
+	}
+	
+	
 
 }

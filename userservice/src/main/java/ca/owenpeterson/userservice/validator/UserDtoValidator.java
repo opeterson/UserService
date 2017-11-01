@@ -8,4 +8,6 @@ import ca.owenpeterson.userservice.models.UserDto;
 public interface UserDtoValidator {
 	
 	public boolean usernameExists(UserDto userDto);
+
+	public boolean emailInUse(UserDto userDto);
 }

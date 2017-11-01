@@ -5,26 +5,29 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import ca.owenpeterson.userservice.models.UserDto;
 
 @Component
-public class UserDao extends HibernateDao {
+public class UserDao extends HibernateDao 
+{
 	
-	private static Logger logger = LogManager.getLogger(UserDao.class);
+	private static final Logger LOGGER = LogManager.getLogger(UserDao.class);
 	
-	public void save(UserDto userDto) {
-		logger.debug("Saving new authenticated user.");
+	public void saveUser(UserDto userDto) 
+	{
+		LOGGER.debug("Saving new authenticated user.");
 		try {
 			super.save(userDto);
 		} catch (HibernateException ex)
 		{
-			logger.debug(ex);
+			LOGGER.debug(ex);
 		}
 	}
 	
-	public UserDto authenticate(UserDto user)
+	public UserDto getUser(UserDto user)
 	{
 		Session session = sessionFactory.openSession();
 		
@@ -40,20 +43,69 @@ public class UserDao extends HibernateDao {
 		return foundUser;
 	}
 	
-	public boolean usernameExists(UserDto user)
+	public boolean usernameInUse(UserDto user)
 	{
 		boolean hasMatch = false;
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(UserDto.class);
 		criteria.add(Restrictions.eq("username", user.getUsername()));
+		criteria.setProjection(Projections.rowCount());
 		
-		UserDto foundUser = (UserDto) criteria.uniqueResult();		
-		
-		session.close();
-		
-		if (null != foundUser)
+		try
 		{
-			hasMatch = user.getUsername().equals(foundUser.getUsername());
+			Long count = (Long) criteria.uniqueResult();
+			
+			if (null != count)
+			{
+				hasMatch = count >= 1;
+			}
+		}
+		catch (HibernateException h)
+		{
+			LOGGER.error(h.getMessage());
+		}
+		catch (Exception e)
+		{
+			LOGGER.error(e);
+		}
+		finally
+		{
+			session.close();
+			//sessionFactory.close();
+		}
+		
+				
+		return hasMatch;
+	}
+	 
+	public boolean emailInUse(UserDto user)
+	{
+		boolean hasMatch = false;
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(UserDto.class);
+		criteria.add(Restrictions.eq("email", user.getEmail()));
+		
+		try
+		{
+			Long count = (Long) criteria.uniqueResult();
+			
+			if (null != count)
+			{
+				hasMatch = count >= 1;
+			}
+		}
+		catch (HibernateException h)
+		{
+			LOGGER.error(h.getMessage());
+		}
+		catch (Exception e)
+		{
+			LOGGER.error(e.getMessage());
+		}
+		finally
+		{
+			session.close();
+			//sessionFactory.close();
 		}
 		
 		return hasMatch;

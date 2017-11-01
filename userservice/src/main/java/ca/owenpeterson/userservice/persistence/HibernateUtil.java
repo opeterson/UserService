@@ -6,8 +6,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateUtil {
-	private static final SessionFactory sessionFactory;
+public class HibernateUtil 
+{
+	private static SessionFactory sessionFactory;
 	private static Logger logger = LogManager.getLogger(HibernateUtil.class);
 	
 	static {
@@ -32,5 +33,4 @@ public class HibernateUtil {
 	public static void shutdown() {
 		sessionFactory.close();
 	}
-
 }
