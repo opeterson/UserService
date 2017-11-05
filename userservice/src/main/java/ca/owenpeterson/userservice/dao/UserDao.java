@@ -63,10 +63,12 @@ public class UserDao extends HibernateDao
 		catch (HibernateException h)
 		{
 			LOGGER.error(h.getMessage());
+			throw h;
 		}
 		catch (Exception e)
 		{
 			LOGGER.error(e);
+			throw e;
 		}
 		finally
 		{
@@ -84,6 +86,7 @@ public class UserDao extends HibernateDao
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(UserDto.class);
 		criteria.add(Restrictions.eq("email", user.getEmail()));
+		criteria.setProjection(Projections.rowCount());
 		
 		try
 		{
@@ -97,10 +100,12 @@ public class UserDao extends HibernateDao
 		catch (HibernateException h)
 		{
 			LOGGER.error(h.getMessage());
+			throw h;
 		}
 		catch (Exception e)
 		{
 			LOGGER.error(e.getMessage());
+			throw e;
 		}
 		finally
 		{

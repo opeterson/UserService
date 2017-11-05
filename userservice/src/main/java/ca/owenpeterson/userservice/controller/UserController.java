@@ -49,14 +49,23 @@ public class UserController {
 				userDao.saveUser(user);
 				//TODO: Return a userDto or maybe just OK.
 				authenticatedUser = new AuthenticatedUser();
+				authenticatedUser.setHttpStatus(HttpStatus.CREATED);
 				authenticatedUser.setUsername(user.getUsername());
-				authenticatedUser.setEmail(user.getEmail());				
+				authenticatedUser.setEmail(user.getEmail());
 			}
-			else
+			else if (userExists)
 			{
-				//The user already exists or email is in use.
 				status = HttpStatus.CONFLICT;
-				//authenticatedUser = new AuthenticatedUser();
+				authenticatedUser = new AuthenticatedUser();
+				authenticatedUser.setHttpStatus(status);
+				authenticatedUser.setErrorMessage("Username already exists.");
+			}
+			else if (emailInUse)
+			{
+				status = HttpStatus.CONFLICT;
+				authenticatedUser = new AuthenticatedUser();
+				authenticatedUser.setHttpStatus(status);
+				authenticatedUser.setErrorMessage("Email is already in use.");
 			}
 		}
 		
