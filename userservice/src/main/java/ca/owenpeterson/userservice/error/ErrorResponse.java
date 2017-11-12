@@ -3,6 +3,7 @@ package ca.owenpeterson.userservice.error;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.http.HttpStatus;
@@ -14,11 +15,7 @@ public class ErrorResponse implements Serializable
 	private HttpStatus httpStatus;
 	private List<ErrorMessage> errorMessages;	
 	
-	public List<ErrorMessage> getErrorMessages() 
-	{
-		return errorMessages;
-	}
-	
+	@XmlElement(name="http_status")
 	public HttpStatus getHttpStatus() 
 	{
 		return httpStatus;
@@ -27,6 +24,12 @@ public class ErrorResponse implements Serializable
 	public void setHttpStatus(HttpStatus httpStatus) 
 	{
 		this.httpStatus = httpStatus;
+	}
+	
+	@XmlElement(name="error_messages")
+	public List<ErrorMessage> getErrorMessages() 
+	{
+		return errorMessages;
 	}
 	
 	public void setErrorMessages(List<ErrorMessage> errorMessages) 
