@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="authenticated_user")
-public class AuthenticatedUser extends RestEntity implements Serializable 
+public class AuthenticatedUser implements Serializable 
 {
 	private static final long serialVersionUID = -6676048350671906151L;
 	private String username;
