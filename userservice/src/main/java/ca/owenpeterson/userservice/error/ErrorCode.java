@@ -2,14 +2,14 @@ package ca.owenpeterson.userservice.error;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import ca.owenpeterson.userservice.domain.xml.ApiErrorCodeXmlAdapter;
 
-@XmlRootElement(name="error_code")
+@XmlJavaTypeAdapter(ApiErrorCodeXmlAdapter.class)
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum ErrorCode implements Serializable
+public enum ErrorCode implements Serializable, ApiErrorCode
 {
 	USERNAME_EXISTS("1001", "The specified username already exists."),
 	EMAIL_IN_USE("1002", "The specified email address is already in use.");
@@ -23,13 +23,11 @@ public enum ErrorCode implements Serializable
 		this.message = message;
 	}
 
-	@XmlElement(name="code")
 	public String getCode() 
 	{
 		return code;
 	}
 
-	@XmlElement(name="message")
 	public String getMessage() 
 	{
 		return message;
