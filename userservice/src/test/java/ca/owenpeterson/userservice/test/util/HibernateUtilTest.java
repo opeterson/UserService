@@ -8,7 +8,8 @@ import org.junit.Test;
 
 import ca.owenpeterson.userservice.persistence.HibernateUtil;
 
-public class HibernateUtilTest {
+public class HibernateUtilTest 
+{
 	
 	@Test
 	public void testGetSessionFactory()
