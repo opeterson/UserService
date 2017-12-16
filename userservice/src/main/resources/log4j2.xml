@@ -7,8 +7,8 @@
 			<layout type="PatternLayout" pattern="${log4j.patternlayout}" />
 		</appender>
 		<appender name="File" type="RollingFile" fileName="${log4j.filename}"
-			filePattern="${log4j.filenamePattern}" bufferedIO="true" immediateFlush="true"
-			append="true">
+			filePattern="${log4j.filenamePattern}" bufferedIO="true"
+			immediateFlush="true" append="true">
 			<layout type="PatternLayout" pattern="${log4j.patternlayout}" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
@@ -21,15 +21,16 @@
 		</appender>
 	</appenders>
 	<loggers>
-	   <logger name="org.springframework">
-      <appender-ref ref="Console" level="${log4j.springframework.console.level}"/>
-      <appender-ref ref="AsyncFile" level="${log4j.springframework.file.level}" />
-    </logger>
-    <logger name="ca.owenpeterson.userservice">
-      <appender-ref ref="AsyncFile" level="${log4j.userservice.file.level}" />
-    </logger>
+		<logger name="org.springframework">
+			<appender-ref ref="Console"	level="${log4j.springframework.console.level}" />
+			<appender-ref ref="AsyncFile" level="${log4j.springframework.file.level}" />
+		</logger>
+		<logger name="ca.owenpeterson.userservice">
+			<appender-ref ref="Console" level="${log4j.userservice.console.level}" />
+			<appender-ref ref="AsyncFile" level="${log4j.userservice.file.level}" />
+		</logger>
 		<root level="${log4j.root.console.level}">
-			<appender-ref ref="Console"  />
+			<appender-ref ref="Console" />
 		</root>
 	</loggers>
 </configuration>
