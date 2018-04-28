@@ -14,16 +14,21 @@ public class HibernateDao {
 	{
 		Session session = sessionFactory.openSession();
 		
-		try {
+		try 
+		{
 			session.beginTransaction();
 			session.save(obj);
 			session.getTransaction().commit();
-		} catch (HibernateException ex)
-		{
-			throw(ex);
 		}
-		
-		session.close();
+		catch (HibernateException ex)
+		{
+			session.getTransaction().rollback();
+			throw(ex);
+		}		
+		finally 
+		{
+			session.close();
+		}		
 	}
 	
 	public void saveOrUpdate(Object obj)

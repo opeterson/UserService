@@ -56,10 +56,12 @@ public class UserController {
 			}
 			else if (userExists)
 			{
+				logger.debug("Username already exists.");
 				throw new UsernameExistsException("The username already exists!");
 			}
 			else if (emailInUse)
 			{
+				logger.debug("Email already in use.");
 				throw new EmailAlreadyInUseException("The email is already in use!");
 			}
 		}
